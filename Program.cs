@@ -60,23 +60,27 @@ namespace rt
 
             const int width = 800;
             const int height = 600;
+            int[] picks = {0, 30, 60 };
 
+            int totalFrames = 10;
+            double degPerFrame = 360.0 / totalFrames;
             // Go around an approximate middle of the scene and generate frames
             var middle = new Vector(0.0, -5.0, 100.0);
             var up = new Vector(0, -1, 0).Normalize();
             var first = new Vector(0, 0, 1).Normalize();
             const double dist = 95.0;
-            const int n = 90;
-            const double step = 360.0 / n;
-            
-            var tasks = new Task[n];
-            for (var i = 0; i < n; i++)
+
+            //var tasks = new Task[picks.Length];
+            var tasks = new Task[totalFrames];
+            //for (var i = 0; i < picks.Length; i++)
+            for (var i = 0; i < totalFrames; i++)
             {
-                var ind = new[]{i};
+
+                var ind = new[] {i};
                 tasks[i] = Task.Run(() =>
                 {
                     var k = ind[0];
-                    var a = (step * k) * Math.PI / 180.0;
+                    var a = (degPerFrame * k) * Math.PI / 180.0;
                     var ca =  Math.Cos(a);
                     var sa =  Math.Sin(a);
             
@@ -96,7 +100,8 @@ namespace rt
                     var filename = frames+"/" + $"{k + 1:000}" + ".png";
             
                     rt.Render(camera, width, height, filename);
-                    Console.WriteLine($"Frame {k+1}/{n} completed");
+                    //Console.WriteLine($"Frame {k+1}/{picks.Length} completed");
+                    Console.WriteLine($"Frame {k+1}/{totalFrames} completed");
                 });
             }
             

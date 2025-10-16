@@ -59,14 +59,14 @@ namespace rt
             // Camera basis
             var D = new Vector(camera.Direction).Normalize();
             var U = new Vector(camera.Up).Normalize();
-            var R = (D ^ U).Normalize();               // right
+            var R = (D ^ U).Normalize();               
             var viewCenter = camera.Position + D * camera.ViewPlaneDistance;
 
             for (var i = 0; i < width; i++)
             {
                 for (var j = 0; j < height; j++)
                 {
-                    // Pixel -> view-plane coordinates
+                    // Pixel - view-plane coordinates
                     double x = ImageToViewPlane(i + 0.5, width, camera.ViewPlaneWidth);
                     double y = ImageToViewPlane(j + 0.5, height, camera.ViewPlaneHeight);
 
@@ -86,7 +86,7 @@ namespace rt
                         continue;
                     }
 
-                    // --- Phong shading ---
+                    //  Phong shading 
                     var N = new Vector(hit.Normal).Normalize();
                     var V = (camera.Position - hit.Position).Normalize();
 
