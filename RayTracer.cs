@@ -95,7 +95,7 @@ namespace rt
                     foreach (var light in lights)
                     {
                         // Ambient
-                        var ambient = hit.Material.Ambient * light.Ambient;
+                        var ambient = (hit.Material.Ambient * light.Ambient) * hit.Color;
 
                         // If in shadow, only ambient
                         if (!IsLit(hit.Position, light))
@@ -108,14 +108,15 @@ namespace rt
                         var NdotL = Math.Max(0.0, N * L);
 
                         // Diffuse
-                        var diffuse = hit.Material.Diffuse * light.Diffuse * NdotL;
+                        var diffuse = (hit.Material.Diffuse * light.Diffuse) * NdotL * hit.Color;
 
-                        // Specular
-                        var Rl = (N * (2.0 * (N * L)) - L).Normalize();   // reflect(L about N)
-                        var RdotV = Math.Max(0.0, Rl * V);
+                        // Specular 
+                        var Rl = (N * (2.0 * (N * L)) - L).Normalize();
+                        var RdotV = Math.Max(1e-6, Rl * V);
                         var spec = hit.Material.Specular * light.Specular * Math.Pow(RdotV, hit.Material.Shininess);
 
                         pixel += ambient + diffuse + spec;
+
                     }
 
                     image.SetPixel(i, j, pixel);
