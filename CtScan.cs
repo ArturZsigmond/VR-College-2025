@@ -124,7 +124,7 @@ public class CtScan : Geometry
         double cellY = _thickness[1] * _scale;
         double cellZ = _thickness[2] * _scale;
         double baseStep = Math.Max(1e-4, Math.Min(cellX, Math.Min(cellY, cellZ)));
-        double step = 0.25 * baseStep;
+        double step = 0.2 * baseStep;
 
         // ISO threshold (ensure we actually pick up the walnut)
         byte iso = 1;

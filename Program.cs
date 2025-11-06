@@ -42,8 +42,9 @@ namespace rt
 
                 new CtScan("ctscan/walnut.dat", "ctscan/walnut.raw", new Vector(-5.0, -20.0, 105.0), 0.2,
                     new ColorMap()
-                        .Add(1, 1, new Color(0.36, 0.26, 0.16, 0.1))
-                        .Add(2, 2, new Color(0.87, 0.72, 0.52, 0.8))
+    .Add(1, 1, new Color(0.25, 0.18, 0.10, 1.0))
+    .Add(2, 2, new Color(0.80, 0.65, 0.45, 1.0))
+
                 ),
             };
 
